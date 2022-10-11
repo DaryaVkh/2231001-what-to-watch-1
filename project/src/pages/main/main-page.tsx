@@ -1,18 +1,15 @@
 import {FC} from 'react';
 import FilmCard from '../../components/film-card/film-card';
 import {FILM_LIST} from '../../mocks/films';
+import {TFilm} from '../../types/film.type';
 
 type Props = {
-  promoFilmTitle: string;
-  promoFilmGenre: string;
-  promoFilmReleaseDate: string;
+  promoFilm: TFilm;
 };
 
 const MainPage: FC<Props> = (props) => {
   const {
-    promoFilmTitle,
-    promoFilmGenre,
-    promoFilmReleaseDate,
+    promoFilm
   } = props;
 
   return (
@@ -84,10 +81,10 @@ const MainPage: FC<Props> = (props) => {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilmTitle}</h2>
+              <h2 className="film-card__title">{promoFilm.title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilmGenre}</span>
-                <span className="film-card__year">{promoFilmReleaseDate}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.releaseDate}</span>
               </p>
 
               <div className="film-card__buttons">
