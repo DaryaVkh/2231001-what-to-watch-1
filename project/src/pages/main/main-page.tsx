@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import FilmCard from '../../components/film-card/film-card';
-import {FILM_LIST} from './main-page.models';
+import {FILM_LIST} from '../../mocks/films';
 
 type Props = {
   promoFilmTitle: string;

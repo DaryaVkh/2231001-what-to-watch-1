@@ -1,7 +1,4 @@
-type TFilm = {
-  title: string;
-  posterPath: string;
-};
+import {TFilm} from '../types/film.type';
 
 export const FILM_LIST: TFilm[] = [
   {
