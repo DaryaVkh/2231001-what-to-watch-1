@@ -1,15 +1,15 @@
 import {FC} from 'react';
+import {TFilm} from '../../types/film.type';
 
 type Props = {
-  title: string;
-  posterPath: string;
+  film: TFilm;
 };
 
 const FilmCard: FC<Props> = (props) => {
   const {
     title,
     posterPath
-  } = props;
+  } = props.film;
 
   return (
     <article className="small-film-card catalog__films-card">

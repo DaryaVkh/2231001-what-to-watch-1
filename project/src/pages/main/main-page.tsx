@@ -149,7 +149,7 @@ const MainPage: FC<Props> = (props) => {
 
           <div className="catalog__films-list">
             {
-              FILM_LIST.map((film) => <FilmCard key={film.posterPath} title={film.title} posterPath={film.posterPath} />)
+              FILM_LIST.map((film) => <FilmCard key={film.posterPath} film={film}/>)
             }
           </div>
 
