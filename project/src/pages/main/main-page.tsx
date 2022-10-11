@@ -1,8 +1,14 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import FilmCard from '../../components/film-card/film-card';
-import { FILM_LIST, MainPageProps } from './main-page.models';
+import {FILM_LIST} from './main-page.models';
 
-const MainPage: FC<MainPageProps> = (props) => {
+type Props = {
+  promoFilmTitle: string;
+  promoFilmGenre: string;
+  promoFilmReleaseDate: string;
+};
+
+const MainPage: FC<Props> = (props) => {
   const {
     promoFilmTitle,
     promoFilmGenre,

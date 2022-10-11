@@ -1,7 +1,11 @@
-import { FC } from 'react';
-import { FilmCardProps } from './film-card.models';
+import {FC} from 'react';
 
-const FilmCard: FC<FilmCardProps> = (props) => {
+type Props = {
+  title: string;
+  posterPath: string;
+};
+
+const FilmCard: FC<Props> = (props) => {
   const {
     title,
     posterPath

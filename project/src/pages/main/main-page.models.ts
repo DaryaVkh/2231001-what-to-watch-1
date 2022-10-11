@@ -1,9 +1,3 @@
-export type MainPageProps = {
-  promoFilmTitle: string;
-  promoFilmGenre: string;
-  promoFilmReleaseDate: string;
-};
-
 type TFilm = {
   title: string;
   posterPath: string;
