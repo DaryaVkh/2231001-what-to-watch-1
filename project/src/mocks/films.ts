@@ -1,6 +1,6 @@
-import {TFilm} from '../types/film.type';
+import { Film } from '../types/film.type';
 
-export const FILM_LIST: TFilm[] = [
+export const FILM_LIST: Film[] = [
   {
     title: 'Fantastic Beasts: The Crimes of Grindewald',
     posterPath: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'

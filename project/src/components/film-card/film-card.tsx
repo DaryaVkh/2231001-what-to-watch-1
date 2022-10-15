@@ -1,8 +1,8 @@
-import {FC} from 'react';
-import {TFilm} from '../../types/film.type';
+import { FC } from 'react';
+import { Film } from '../../types/film.type';
 
 type Props = {
-  film: TFilm;
+  film: Film;
 };
 
 const FilmCard: FC<Props> = (props) => {

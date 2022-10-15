@@ -1,4 +1,4 @@
-export type TFilm = {
+export type Film = {
   title: string;
   posterPath: string;
   genre?: string;
