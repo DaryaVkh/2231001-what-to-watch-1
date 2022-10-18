@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import {FC} from 'react';
+import {Link} from 'react-router-dom';
 
 type Props = {
   light?: boolean;
@@ -7,6 +7,7 @@ type Props = {
 
 const Logo: FC<Props> = (props) => {
   const {light} = props;
+
   return (
     <div className="logo">
       <Link to="/" className={`logo__link ${light ? 'logo__link--light' : ''}`}>

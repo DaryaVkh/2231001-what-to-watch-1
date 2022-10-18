@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import FilmCard from '../../components/film-card/film-card';
-import { FILM_LIST } from '../../mocks/films';
-import { Film } from '../../types/film.type';
+import {FILM_LIST} from '../../mocks/films';
+import {Film} from '../../types/film.type';
 import Logo from '../../components/logo/logo';
 
 type Props = {
@@ -9,9 +9,7 @@ type Props = {
 };
 
 const MainPage: FC<Props> = (props) => {
-  const {
-    promoFilm
-  } = props;
+  const {promoFilm} = props;
 
   return (
     <>
