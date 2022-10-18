@@ -1,8 +1,8 @@
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import MainPage from '../../pages/main/main-page';
-import { Film } from '../../types/film.type';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {Film} from '../../types/film.type';
 import SignInPage from '../../pages/sign-in/sign-in-page';
-import { AppRoute, AuthorizationStatus } from '../../common/models';
+import {AppRoute, AuthorizationStatus} from '../../common/models';
 import PrivateRoute from '../private-route/private-route';
 import MyListPage from '../../pages/my-list/my-list-page';
 import FilmPage from '../../pages/film/film-page';
