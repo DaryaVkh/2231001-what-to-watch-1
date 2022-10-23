@@ -1,16 +1,15 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import FilmCard from '../../components/film-card/film-card';
-import { FILM_LIST } from '../../mocks/films';
-import { Film } from '../../types/film.type';
+import {FILM_LIST} from '../../mocks/films';
+import {Film} from '../../types/film.type';
+import Logo from '../../components/logo/logo';
 
 type Props = {
   promoFilm: Film;
 };
 
 const MainPage: FC<Props> = (props) => {
-  const {
-    promoFilm
-  } = props;
+  const {promoFilm} = props;
 
   return (
     <>
@@ -22,13 +21,7 @@ const MainPage: FC<Props> = (props) => {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a href={'/'} className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
 
           <ul className="user-block">
             <li className="user-block__item">
