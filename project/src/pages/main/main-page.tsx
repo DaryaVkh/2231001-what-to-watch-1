@@ -105,9 +105,7 @@ const MainPage: FC<Props> = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            <FilmList films={films}/>
-          </div>
+          <FilmList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

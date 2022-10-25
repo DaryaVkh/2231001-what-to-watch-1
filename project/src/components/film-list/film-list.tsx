@@ -11,11 +11,11 @@ const FilmList: FC<Props> = (props) => {
   const [, setActiveFilmCard] = useState<number | null>(null);
 
   return (
-    <>
+    <div className="catalog__films-list">
       {
         films.map((film) => <FilmCard key={film.id} film={film} onHover={setActiveFilmCard}/>)
       }
-    </>
+    </div>
   );
 };
 

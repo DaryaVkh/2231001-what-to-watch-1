@@ -11,13 +11,6 @@ const AddReviewForm: FC = () => {
     reviewText: ''
   });
 
-  const renderRatingStars = () => Array.from(Array(10).keys()).map((cur) => (
-    <span key={cur}>
-      <input className="rating__input" id={`star-${cur + 1}`} type="radio" name="rating" value={cur + 1} checked={formValue.starsCount === cur + 1} onChange={handleStarsCountChange}/>
-      <label className="rating__label" htmlFor={`star-${cur + 1}`}>Rating {cur + 1}</label>
-    </span>
-  ));
-
   const handleReviewTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormValue((prevValue) => ({
       ...prevValue,
@@ -36,7 +29,14 @@ const AddReviewForm: FC = () => {
     <form action="#" className="add-review__form">
       <div className="rating">
         <div className="rating__stars">
-          {renderRatingStars()}
+          {
+            Array.from(Array(10).keys()).map((cur) => (
+              <span key={cur}>
+                <input className="rating__input" id={`star-${cur + 1}`} type="radio" name="rating" value={cur + 1} checked={formValue.starsCount === cur + 1} onChange={handleStarsCountChange}/>
+                <label className="rating__label" htmlFor={`star-${cur + 1}`}>Rating {cur + 1}</label>
+              </span>
+            ))
+          }
         </div>
       </div>
 
@@ -45,7 +45,6 @@ const AddReviewForm: FC = () => {
         <div className="add-review__submit">
           <button className="add-review__btn" type="submit">Post</button>
         </div>
-
       </div>
     </form>
   );
