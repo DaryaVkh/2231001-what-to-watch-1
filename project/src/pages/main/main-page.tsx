@@ -1,27 +1,27 @@
-import {FC} from 'react';
-import FilmCard from '../../components/film-card/film-card';
-import {FILM_LIST} from '../../mocks/films';
-import {Film} from '../../types/film.type';
+import { FC } from 'react';
+import { Film } from '../../types/film.type';
 import Logo from '../../components/logo/logo';
+import FilmList from '../../components/film-list/film-list';
 
 type Props = {
   promoFilm: Film;
+  films: Film[];
 };
 
 const MainPage: FC<Props> = (props) => {
-  const {promoFilm} = props;
+  const { promoFilm, films } = props;
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src={promoFilm.backgroundImage} alt={promoFilm.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <Logo />
+          <Logo/>
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -38,26 +38,26 @@ const MainPage: FC<Props> = (props) => {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+              <img src={promoFilm.posterImage} alt={promoFilm.name} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilm.title}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{promoFilm.genre}</span>
-                <span className="film-card__year">{promoFilm.releaseDate}</span>
+                <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s" />
+                    <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add" />
+                    <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
                   <span className="film-card__count">9</span>
@@ -105,11 +105,7 @@ const MainPage: FC<Props> = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {
-              FILM_LIST.map((film) => <FilmCard key={film.posterPath} film={film}/>)
-            }
-          </div>
+          <FilmList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -117,13 +113,7 @@ const MainPage: FC<Props> = (props) => {
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a href={'/'} className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo light/>
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
