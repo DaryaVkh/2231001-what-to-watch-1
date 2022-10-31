@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, Fragment, useState } from 'react';
 
 type ReviewFormValue = {
   starsCount: number;
@@ -31,10 +31,10 @@ const AddReviewForm: FC = () => {
         <div className="rating__stars">
           {
             Array.from(Array(10).keys()).map((cur) => (
-              <span key={cur}>
+              <Fragment key={cur}>
                 <input className="rating__input" id={`star-${cur + 1}`} type="radio" name="rating" value={cur + 1} checked={formValue.starsCount === cur + 1} onChange={handleStarsCountChange}/>
                 <label className="rating__label" htmlFor={`star-${cur + 1}`}>Rating {cur + 1}</label>
-              </span>
+              </Fragment>
             ))
           }
         </div>
