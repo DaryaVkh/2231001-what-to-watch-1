@@ -12,8 +12,8 @@ type Props = {
 };
 
 const FilmPage: FC<Props> = (props) => {
-  const {films} = props;
-  const {filmId} = useParams();
+  const { films } = props;
+  const { filmId } = useParams();
   const film = getFilmById(Number(filmId));
 
   if (!film) {
