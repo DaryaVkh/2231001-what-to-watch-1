@@ -1,8 +1,11 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
 import { FILM_LIST } from '../../mocks/films';
+import { resetVisibleFilmsCount } from '../../store/action';
 import { Film } from '../../types/film.type';
 import { Genre } from '../../types/genre.enum';
 
@@ -12,6 +15,12 @@ type Props = {
 
 const MainPage: FC<Props> = (props) => {
   const { promoFilm } = props;
+  const { filmList, visibleFilmsCount } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => () => {
+    dispatch(resetVisibleFilmsCount());
+  }, [dispatch]);
 
   return (
     <>
@@ -74,13 +83,11 @@ const MainPage: FC<Props> = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList genreList={[Genre.ALL_GENRES, ...new Set(FILM_LIST.map((film) => film.genre))]} />
+          <GenreList genreList={[Genre.ALL_GENRES, ...new Set(FILM_LIST.map((film) => film.genre))]}/>
 
-          <FilmList />
+          <FilmList filmList={filmList.slice(0, visibleFilmsCount)} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton />
         </section>
 
         <footer className="page-footer">

@@ -1,9 +1,13 @@
 import { FC, useState } from 'react';
-import { useAppSelector } from '../../hooks/store-helpers';
+import { Film } from '../../types/film.type';
 import FilmCard from '../film-card/film-card';
 
-const FilmList: FC = () => {
-  const { filmList } = useAppSelector((state) => state);
+type Props = {
+  filmList: Film[];
+};
+
+const FilmList: FC<Props> = (props) => {
+  const { filmList } = props;
   const [, setActiveFilmCard] = useState<number | null>(null);
 
   return (

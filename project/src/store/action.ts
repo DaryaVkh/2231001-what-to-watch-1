@@ -4,3 +4,5 @@ import { Genre } from '../types/genre.enum';
 
 export const changeActiveGenre = createAction<{ newGenre: Genre }>('changeActiveGenre');
 export const setFilmList = createAction<{ filmList: Film[] }>('setFilmList');
+export const incVisibleFilmsCount = createAction('incVisibleFilmsCount');
+export const resetVisibleFilmsCount = createAction('resetVisibleFilmsCount');

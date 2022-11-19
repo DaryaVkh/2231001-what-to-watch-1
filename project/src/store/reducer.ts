@@ -1,11 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { FILM_LIST } from '../mocks/films';
 import { Genre } from '../types/genre.enum';
-import { changeActiveGenre, setFilmList } from './action';
+import { changeActiveGenre, incVisibleFilmsCount, resetVisibleFilmsCount, setFilmList } from './action';
+
+const VISIBLE_FILMS_COUNT_STEP = 8;
 
 const initialState = {
   activeGenre: Genre.ALL_GENRES,
-  filmList: FILM_LIST
+  filmList: FILM_LIST,
+  visibleFilmsCount: VISIBLE_FILMS_COUNT_STEP
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -19,6 +22,12 @@ const reducer = createReducer(initialState, (builder) => {
       const { filmList } = action.payload;
 
       state.filmList = filmList;
+    })
+    .addCase(incVisibleFilmsCount, (state) => {
+      state.visibleFilmsCount += VISIBLE_FILMS_COUNT_STEP;
+    })
+    .addCase(resetVisibleFilmsCount, (state) => {
+      state.visibleFilmsCount = VISIBLE_FILMS_COUNT_STEP;
     });
 });
 

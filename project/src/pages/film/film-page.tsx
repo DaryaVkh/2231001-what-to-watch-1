@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../types/film.type';
-import Logo from '../../components/logo/logo';
-import { getFilmById } from '../../mocks/films';
-import Tabs from '../../components/tabs/tabs';
-import Error404Page from '../error-404/error-404-page';
 import FilmList from '../../components/film-list/film-list';
+import Logo from '../../components/logo/logo';
+import Tabs from '../../components/tabs/tabs';
+import { getFilmById } from '../../mocks/films';
+import { Film } from '../../types/film.type';
+import Error404Page from '../error-404/error-404-page';
 
 type Props = {
   films: Film[];
@@ -89,7 +89,7 @@ const FilmPage: FC<Props> = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmList films={films.filter((otherFilm) => otherFilm !== film && otherFilm.genre === film.genre).slice(0, 4)}/>
+          <FilmList filmList={films.filter((otherFilm) => otherFilm !== film && otherFilm.genre === film.genre).slice(0, 4)}/>
         </section>
 
         <footer className="page-footer">

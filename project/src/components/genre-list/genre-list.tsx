@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
 import { FILM_LIST } from '../../mocks/films';
-import { changeActiveGenre, setFilmList } from '../../store/action';
+import { changeActiveGenre, resetVisibleFilmsCount, setFilmList } from '../../store/action';
 import { Genre } from '../../types/genre.enum';
 
 type Props = {
@@ -16,6 +16,7 @@ const GenreList: FC<Props> = (props) => {
   const handleChangeActiveGenre = (genre: string) => {
     dispatch(changeActiveGenre({ newGenre: genre as Genre }));
     dispatch(setFilmList({ filmList: FILM_LIST.filter((film) => film.genre === genre || genre === Genre.ALL_GENRES) }));
+    dispatch(resetVisibleFilmsCount());
   };
 
   return (
