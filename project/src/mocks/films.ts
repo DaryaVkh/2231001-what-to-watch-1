@@ -1,4 +1,5 @@
 import { Film, RatingCategory } from '../types/film.type';
+import { Genre } from '../types/genre.enum';
 
 export const FILM_LIST: Film[] = [
   {
@@ -16,7 +17,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.DOCUMENTARY,
     released: 2010,
     isFavorite: true
   },
@@ -35,7 +36,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.CRIME,
     released: 2010,
     isFavorite: true
   },
@@ -54,7 +55,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.COMEDY,
     released: 2010,
     isFavorite: true
   },
@@ -73,7 +74,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.HORROR,
     released: 2010,
     isFavorite: true
   },
@@ -92,7 +93,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.THRILLER,
     released: 2010,
     isFavorite: true
   },
@@ -111,7 +112,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.DRAMA,
     released: 2010,
     isFavorite: true
   },
@@ -130,7 +131,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.SCI_FI,
     released: 2010,
     isFavorite: true
   },
@@ -149,7 +150,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.ROMANCE,
     released: 2010,
     isFavorite: true
   },
@@ -168,7 +169,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.KIDS_AND_FAMILY,
     released: 2010,
     isFavorite: true
   },
@@ -187,7 +188,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.ROMANCE,
     released: 2010,
     isFavorite: true
   },
@@ -206,7 +207,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.CRIME,
     released: 2010,
     isFavorite: true
   },
@@ -225,7 +226,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.KIDS_AND_FAMILY,
     released: 2010,
     isFavorite: true
   },
@@ -244,7 +245,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.THRILLER,
     released: 2010,
     isFavorite: true
   },
@@ -263,7 +264,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.COMEDY,
     released: 2010,
     isFavorite: true
   },
@@ -282,7 +283,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.THRILLER,
     released: 2010,
     isFavorite: true
   },
@@ -301,7 +302,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.SCI_FI,
     released: 2010,
     isFavorite: true
   },
@@ -320,7 +321,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.DOCUMENTARY,
     released: 2010,
     isFavorite: true
   },
@@ -339,7 +340,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.DRAMA,
     released: 2010,
     isFavorite: true
   },
@@ -358,7 +359,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.THRILLER,
     released: 2010,
     isFavorite: true
   },
@@ -377,7 +378,7 @@ export const FILM_LIST: Film[] = [
     director: 'Director',
     starring: ['Actor 1', 'Actor 2', 'Actor 3'],
     runTime: 60,
-    genre: 'Crime',
+    genre: Genre.SCI_FI,
     released: 2010,
     isFavorite: true
   }
@@ -398,7 +399,7 @@ export const PROMO_FILM: Film = {
   director: 'Director',
   starring: ['Actor 1', 'Actor 2', 'Actor 3'],
   runTime: 60,
-  genre: 'Crime',
+  genre: Genre.CRIME,
   released: 2010,
   isFavorite: true
 };
