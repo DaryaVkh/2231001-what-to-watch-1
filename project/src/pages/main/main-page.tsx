@@ -2,6 +2,7 @@ import { FC } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
+import { FILM_LIST } from '../../mocks/films';
 import { Film } from '../../types/film.type';
 import { Genre } from '../../types/genre.enum';
 
@@ -73,7 +74,7 @@ const MainPage: FC<Props> = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList genreList={Object.values(Genre)} />
+          <GenreList genreList={[Genre.ALL_GENRES, ...new Set(FILM_LIST.map((film) => film.genre))]} />
 
           <FilmList />
 
