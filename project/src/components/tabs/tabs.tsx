@@ -1,9 +1,10 @@
+import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { REVIEW_LIST } from '../../mocks/reviews';
-import { Tab } from '../../types/tab.enum';
 import { Film } from '../../types/film.type';
-import OverviewTab from './overview-tab';
+import { Tab } from '../../types/tab.enum';
 import DetailsTab from './details-tab';
+import OverviewTab from './overview-tab';
 import ReviewsTab from './reviews-tab';
 
 type Props = {
@@ -26,17 +27,22 @@ const Tabs: FC<Props> = (props) => {
     }
   };
 
+  const getTabClasses = (tab: Tab) => classNames({
+    'film-nav__item': true,
+    'film-nav__item--active': activeTab === tab
+  });
+
   return (
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          <li className={`film-nav__item ${activeTab === Tab.OVERVIEW ? 'film-nav__item--active' : ''}`}>
+          <li className={getTabClasses(Tab.OVERVIEW)}>
             <span className="film-nav__link" onClick={() => setActiveTab(Tab.OVERVIEW)}>Overview</span>
           </li>
-          <li className={`film-nav__item ${activeTab === Tab.DETAILS ? 'film-nav__item--active' : ''}`}>
+          <li className={getTabClasses(Tab.DETAILS)}>
             <span className="film-nav__link" onClick={() => setActiveTab(Tab.DETAILS)}>Details</span>
           </li>
-          <li className={`film-nav__item ${activeTab === Tab.REVIEWS ? 'film-nav__item--active' : ''}`}>
+          <li className={getTabClasses(Tab.REVIEWS)}>
             <span className="film-nav__link" onClick={() => setActiveTab(Tab.REVIEWS)}>Reviews</span>
           </li>
         </ul>

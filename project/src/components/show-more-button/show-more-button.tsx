@@ -1,14 +1,17 @@
-import { FC } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
-import { incVisibleFilmsCount } from '../../store/action';
+import { Dispatch, FC, SetStateAction } from 'react';
+import { VISIBLE_FILMS_COUNT_STEP } from '../../common/models';
 
-const ShowMoreButton: FC = () => {
-  const { filmList, visibleFilmsCount } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
+type Props = {
+  isVisible: boolean;
+  setVisibleFilmsCount: Dispatch<SetStateAction<number>>;
+};
+
+const ShowMoreButton: FC<Props> = (props) => {
+  const { setVisibleFilmsCount, isVisible } = props;
 
   return (
-    <div className="catalog__more" style={{display: filmList.length > visibleFilmsCount ? 'block' : 'none'}}>
-      <button className="catalog__button" type="button" onClick={() => dispatch(incVisibleFilmsCount())}>Show more</button>
+    <div className="catalog__more" style={{display: isVisible ? 'block' : 'none'}}>
+      <button className="catalog__button" type="button" onClick={() => setVisibleFilmsCount((prev) => prev + VISIBLE_FILMS_COUNT_STEP)}>Show more</button>
     </div>
   );
 };

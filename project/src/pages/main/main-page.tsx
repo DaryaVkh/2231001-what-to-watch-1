@@ -1,11 +1,10 @@
-import { FC, useEffect } from 'react';
+import { FC, useState } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { useAppSelector } from '../../hooks/store-helpers';
 import { FILM_LIST } from '../../mocks/films';
-import { resetVisibleFilmsCount } from '../../store/action';
 import { Film } from '../../types/film.type';
 import { Genre } from '../../types/genre.enum';
 
@@ -15,12 +14,9 @@ type Props = {
 
 const MainPage: FC<Props> = (props) => {
   const { promoFilm } = props;
-  const { filmList, visibleFilmsCount } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => () => {
-    dispatch(resetVisibleFilmsCount());
-  }, [dispatch]);
+  const { genre } = useAppSelector((state) => state);
+  const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
+  const filteredFilms = FILM_LIST.filter((film) => film.genre === genre || genre === Genre.ALL_GENRES);
 
   return (
     <>
@@ -83,11 +79,11 @@ const MainPage: FC<Props> = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList genreList={[Genre.ALL_GENRES, ...new Set(FILM_LIST.map((film) => film.genre))]}/>
+          <GenreList genreList={[Genre.ALL_GENRES, ...new Set(FILM_LIST.map((film) => film.genre))]} setVisibleFilmsCount={setVisibleFilmsCount}/>
 
-          <FilmList filmList={filmList.slice(0, visibleFilmsCount)} />
+          <FilmList films={filteredFilms.slice(0, visibleFilmsCount)}/>
 
-          <ShowMoreButton />
+          <ShowMoreButton setVisibleFilmsCount={setVisibleFilmsCount} isVisible={filteredFilms.length > visibleFilmsCount}/>
         </section>
 
         <footer className="page-footer">
