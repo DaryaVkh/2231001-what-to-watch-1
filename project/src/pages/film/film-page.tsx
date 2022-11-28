@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../types/film.type';
-import Logo from '../../components/logo/logo';
-import { getFilmById } from '../../mocks/films';
-import Tabs from '../../components/tabs/tabs';
-import Error404Page from '../error-404/error-404-page';
 import FilmList from '../../components/film-list/film-list';
+import Logo from '../../components/logo/logo';
+import Tabs from '../../components/tabs/tabs';
+import { getFilmById } from '../../mocks/films';
+import { Film } from '../../types/film.type';
+import Error404Page from '../error-404/error-404-page';
 
 type Props = {
   films: Film[];

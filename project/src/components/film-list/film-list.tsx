@@ -1,15 +1,25 @@
 import { FC, useState } from 'react';
-import { useAppSelector } from '../../hooks/store-helpers';
+import { Film } from '../../types/film.type';
 import FilmCard from '../film-card/film-card';
 
-const FilmList: FC = () => {
-  const { filmList } = useAppSelector((state) => state);
+type Props = {
+  films: Film[];
+};
+
+const FilmList: FC<Props> = (props) => {
+  const { films } = props;
   const [, setActiveFilmCard] = useState<number | null>(null);
 
   return (
     <div className="catalog__films-list">
       {
-        filmList.map((film) => <FilmCard key={film.id} film={film} onHover={setActiveFilmCard}/>)
+        films.map((film) => (
+          <FilmCard
+            key={film.id}
+            film={film}
+            onHover={setActiveFilmCard}
+          />
+        ))
       }
     </div>
   );

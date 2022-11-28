@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
-import { FILM_LIST } from '../../mocks/films';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import { useAppSelector } from '../../hooks/store-helpers';
 import { Film } from '../../types/film.type';
 import { Genre } from '../../types/genre.enum';
 
@@ -12,6 +13,9 @@ type Props = {
 
 const MainPage: FC<Props> = (props) => {
   const { promoFilm } = props;
+  const { genre, films } = useAppSelector((state) => state);
+  const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
+  const filteredFilms = films.filter((film) => film.genre === genre || genre === Genre.ALL_GENRES);
 
   return (
     <>
@@ -74,13 +78,11 @@ const MainPage: FC<Props> = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList genreList={[Genre.ALL_GENRES, ...new Set(FILM_LIST.map((film) => film.genre))]} />
+          <GenreList genreList={[Genre.ALL_GENRES, ...new Set(films.map((film) => film.genre))]} setVisibleFilmsCount={setVisibleFilmsCount}/>
 
-          <FilmList />
+          <FilmList films={filteredFilms.slice(0, visibleFilmsCount)}/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton setVisibleFilmsCount={setVisibleFilmsCount} isVisible={filteredFilms.length > visibleFilmsCount}/>
         </section>
 
         <footer className="page-footer">

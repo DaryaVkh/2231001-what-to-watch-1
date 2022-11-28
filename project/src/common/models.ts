@@ -13,3 +13,5 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const VISIBLE_FILMS_COUNT_STEP = 8;
