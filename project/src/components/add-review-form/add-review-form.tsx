@@ -1,11 +1,17 @@
-import { ChangeEvent, FC, Fragment, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, Fragment, useState } from 'react';
+import { postFilmReview } from '../../common/api-functions';
 
 type ReviewFormValue = {
   starsCount: number;
   reviewText: string;
 };
 
-const AddReviewForm: FC = () => {
+type Props = {
+  filmId: number;
+};
+
+const AddReviewForm: FC<Props> = (props) => {
+  const { filmId } = props;
   const [formValue, setFormValue] = useState<ReviewFormValue>({
     starsCount: 0,
     reviewText: ''
@@ -25,8 +31,20 @@ const AddReviewForm: FC = () => {
     }));
   };
 
+  const onSubmit = (review: ReviewFormValue) => {
+    postFilmReview(filmId, {comment: review.reviewText, rating: review.starsCount}).then();
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (formValue.reviewText && formValue.starsCount) {
+      onSubmit(formValue);
+    }
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={handleSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {
