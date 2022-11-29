@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getFilmById } from '../../common/functions';
 import FilmList from '../../components/film-list/film-list';
+import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import { Film } from '../../types/film.type';
@@ -33,16 +34,7 @@ const FilmPage: FC<Props> = (props) => {
           <header className="page-header film-card__head">
             <Logo/>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a href={'/'} className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <HeaderUserBlock/>
           </header>
 
           <div className="film-card__wrap">

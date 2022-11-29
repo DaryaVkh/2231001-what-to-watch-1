@@ -16,6 +16,8 @@ export enum AuthorizationStatus {
 
 export enum APIRoute {
   FILMS = '/films',
+  LOGIN = '/login',
+  LOGOUT = '/logout'
 }
 
 export const VISIBLE_FILMS_COUNT_STEP = 8;

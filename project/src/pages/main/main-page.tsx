@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
+import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Spinner from '../../components/spinner/spinner';
@@ -19,7 +20,7 @@ const MainPage: FC<Props> = (props) => {
   const filteredFilms = films.filter((film) => film.genre === genre || genre === Genre.ALL_GENRES);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner/>;
   }
 
   return (
@@ -34,16 +35,7 @@ const MainPage: FC<Props> = (props) => {
         <header className="page-header film-card__head">
           <Logo/>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href={'/'} className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <HeaderUserBlock />
         </header>
 
         <div className="film-card__wrap">

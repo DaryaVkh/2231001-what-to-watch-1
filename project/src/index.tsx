@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import App from './components/app/app';
 import { PROMO_FILM } from './mocks/films';
 import { store } from './store';
-import { fetchFilmsAction } from './store/api-actions';
+import { checkAuthAction, fetchFilmsAction } from './store/api-actions';
 
 store.dispatch(fetchFilmsAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
