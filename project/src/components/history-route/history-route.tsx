@@ -1,15 +1,15 @@
 import type { BrowserHistory } from 'history';
-import { ReactNode, useLayoutEffect, useState } from 'react';
+import { FC, ReactNode, useLayoutEffect, useState } from 'react';
 import { Router } from 'react-router-dom';
 
-export interface HistoryRouterProps {
-  history: BrowserHistory
-  basename?: string
-  children?: ReactNode
-}
+type Props = {
+  history: BrowserHistory;
+  basename?: string;
+  children?: ReactNode;
+};
 
-const HistoryRouter = (historyRouterProps: HistoryRouterProps) => {
-  const { history, basename, children } = historyRouterProps;
+const HistoryRouter: FC<Props> = (props) => {
+  const { history, basename, children } = props;
   const [state, setState] = useState({
     action: history.action,
     location: history.location,
@@ -27,6 +27,6 @@ const HistoryRouter = (historyRouterProps: HistoryRouterProps) => {
       {children}
     </Router>
   );
-}
+};
 
 export default HistoryRouter;

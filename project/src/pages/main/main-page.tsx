@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { getPromoFilm } from '../../common/api-functions';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
@@ -9,17 +10,17 @@ import { useAppSelector } from '../../hooks/store-helpers';
 import { Film } from '../../types/film.type';
 import { Genre } from '../../types/genre.enum';
 
-type Props = {
-  promoFilm: Film;
-};
-
-const MainPage: FC<Props> = (props) => {
-  const { promoFilm } = props;
+const MainPage: FC = () => {
   const { genre, films, isLoading } = useAppSelector((state) => state);
   const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
+  const [promoFilm, setPromoFilm] = useState<Film>();
   const filteredFilms = films.filter((film) => film.genre === genre || genre === Genre.ALL_GENRES);
 
-  if (isLoading) {
+  useEffect(() => {
+    getPromoFilm().then(({ data }) => setPromoFilm(data));
+  }, []);
+
+  if (isLoading || !promoFilm) {
     return <Spinner/>;
   }
 

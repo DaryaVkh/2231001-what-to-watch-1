@@ -10,3 +10,5 @@ export const getSimilarFilms = async (filmId: number) => await api.get<Film[]>(`
 export const getFilmReviews = async (filmId: number) => await api.get<Review[]>(`${APIRoute.COMMENTS}/${filmId}`);
 
 export const postFilmReview = async (filmId: number, review: { comment: string, rating: number }) => await api.post<Review[]>(`${APIRoute.COMMENTS}/${filmId}`, {...review});
+
+export const getPromoFilm = async () => await api.get<Film>(APIRoute.PROMO);

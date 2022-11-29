@@ -18,7 +18,8 @@ export enum APIRoute {
   FILMS = '/films',
   LOGIN = '/login',
   LOGOUT = '/logout',
-  COMMENTS = '/comments'
+  COMMENTS = '/comments',
+  PROMO = '/promo'
 }
 
 export const VISIBLE_FILMS_COUNT_STEP = 8;
