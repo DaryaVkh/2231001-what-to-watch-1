@@ -3,6 +3,7 @@ import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import Spinner from '../../components/spinner/spinner';
 import { useAppSelector } from '../../hooks/store-helpers';
 import { Film } from '../../types/film.type';
 import { Genre } from '../../types/genre.enum';
@@ -13,9 +14,13 @@ type Props = {
 
 const MainPage: FC<Props> = (props) => {
   const { promoFilm } = props;
-  const { genre, films } = useAppSelector((state) => state);
+  const { genre, films, isLoading } = useAppSelector((state) => state);
   const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
   const filteredFilms = films.filter((film) => film.genre === genre || genre === Genre.ALL_GENRES);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

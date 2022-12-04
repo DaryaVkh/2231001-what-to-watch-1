@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Logo from '../../components/logo/logo';
+import { getFilmById } from '../../common/functions';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
-import { getFilmById } from '../../mocks/films';
+import Logo from '../../components/logo/logo';
 
 const AddReviewPage: FC = () => {
   const { filmId } = useParams();
