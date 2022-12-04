@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../common/models';
+import { AppRoute } from '../../common/models';
 import { useAppSelector } from '../../hooks/store-helpers';
 import AddReviewPage from '../../pages/add-review/add-review-page';
 import Error404Page from '../../pages/error-404/error-404-page';
@@ -28,7 +28,7 @@ const App: FC<Props> = (props) => {
         <Route path={AppRoute.MAIN}>
           <Route index element={<MainPage promoFilm={promoFilm} />}/>
           <Route path={AppRoute.SIGN_IN} element={<SignInPage />}/>
-          <Route path={AppRoute.MY_LIST} element={<PrivateRoute authorizationStatus={AuthorizationStatus.NO_AUTH}><MyListPage films={films} /></PrivateRoute>}/>
+          <Route path={AppRoute.MY_LIST} element={<PrivateRoute><MyListPage films={films} /></PrivateRoute>}/>
           <Route path={AppRoute.FILM}>
             <Route index element={<FilmPage films={films} />}/>
             <Route path={AppRoute.ADD_REVIEW} element={<AddReviewPage />}/>
