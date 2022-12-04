@@ -1,4 +1,4 @@
-import { Film, RatingCategory } from '../types/film.type';
+import { RatingCategory } from '../types/film.type';
 
 export function getRatingCategoryByRating(rating: number): RatingCategory {
   if (rating < 3) {
@@ -11,8 +11,4 @@ export function getRatingCategoryByRating(rating: number): RatingCategory {
     return RatingCategory.VERY_GOOD;
   }
   return RatingCategory.AWESOME;
-}
-
-export function getFilmById(filmId: number): Film | undefined {
-  return Array<Film>().find<Film>((film): film is Film => film.id === filmId);
 }

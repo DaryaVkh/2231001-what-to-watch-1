@@ -1,5 +1,5 @@
 import { FC, SyntheticEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../common/models';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
 import { logoutAction } from '../../store/api-actions';
@@ -7,13 +7,11 @@ import { logoutAction } from '../../store/api-actions';
 const HeaderUserBlock: FC = () => {
   const { authorizationStatus, user } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleSignOut = (event: SyntheticEvent) => {
     event.preventDefault();
 
     dispatch(logoutAction());
-    navigate(AppRoute.MAIN);
   };
 
   return (

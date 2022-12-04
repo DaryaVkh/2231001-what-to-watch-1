@@ -1,24 +1,37 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getFilmById } from '../../common/functions';
+import { getFilm, getSimilarFilms } from '../../common/api-functions';
+import { AppRoute, AuthorizationStatus } from '../../common/models';
 import FilmList from '../../components/film-list/film-list';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
+import Spinner from '../../components/spinner/spinner';
 import Tabs from '../../components/tabs/tabs';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { redirectToRoute } from '../../store/action';
 import { Film } from '../../types/film.type';
-import Error404Page from '../error-404/error-404-page';
 
-type Props = {
-  films: Film[];
-};
+const FilmPage: FC = () => {
+  const params = useParams();
+  const filmId = Number(params.filmId);
+  const [film, setFilm] = useState<Film>();
+  const [similarFilms, setSimilarFilms] = useState<Film[]>([]);
+  const dispatch = useAppDispatch();
+  const { authorizationStatus } = useAppSelector((state) => state);
 
-const FilmPage: FC<Props> = (props) => {
-  const { films } = props;
-  const { filmId } = useParams();
-  const film = getFilmById(Number(filmId));
+  useEffect(() => {
+    getFilm(filmId).then(({ data }) => {
+      if (data) {
+        setFilm(data);
+      } else {
+        dispatch(redirectToRoute(AppRoute.ERROR404));
+      }
+    });
+    getSimilarFilms(filmId).then(({ data }) => setSimilarFilms(data));
+  }, [filmId]);
 
   if (!film) {
-    return <Error404Page/>;
+    return <Spinner />;
   }
 
   return (
@@ -59,7 +72,11 @@ const FilmPage: FC<Props> = (props) => {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+                {
+                  authorizationStatus === AuthorizationStatus.AUTH
+                    ? <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+                    : null
+                }
               </div>
             </div>
           </div>
@@ -81,7 +98,7 @@ const FilmPage: FC<Props> = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmList films={films.filter((otherFilm) => otherFilm !== film && otherFilm.genre === film.genre).slice(0, 4)}/>
+          <FilmList films={similarFilms}/>
         </section>
 
         <footer className="page-footer">

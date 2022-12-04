@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { APIRoute, AuthorizationStatus } from '../common/models';
+import { APIRoute, AppRoute, AuthorizationStatus } from '../common/models';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data.type';
 import { Film } from '../types/film.type';
 import { AppDispatch, State } from '../types/state.type';
 import { User } from '../types/user.type';
-import { changeAuthStatus, loadFilms, setLoading, setUserInfo } from './action';
+import { changeAuthStatus, loadFilms, redirectToRoute, setLoading, setUserInfo } from './action';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -49,6 +49,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(user.token);
     dispatch(changeAuthStatus(AuthorizationStatus.AUTH));
     dispatch(setUserInfo(user));
+    dispatch(redirectToRoute(AppRoute.MAIN));
   },
 );
 
@@ -63,5 +64,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dropToken();
     dispatch(changeAuthStatus(AuthorizationStatus.NO_AUTH));
     dispatch(setUserInfo(null));
+    dispatch(redirectToRoute(AppRoute.MAIN));
   },
 );

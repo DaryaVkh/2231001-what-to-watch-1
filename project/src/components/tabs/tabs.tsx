@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC, useState } from 'react';
-import { REVIEW_LIST } from '../../mocks/reviews';
 import { Film } from '../../types/film.type';
 import { Tab } from '../../types/tab.enum';
 import DetailsTab from './details-tab';
@@ -14,14 +13,13 @@ type Props = {
 const Tabs: FC<Props> = (props) => {
   const { film } = props;
   const [activeTab, setActiveTab] = useState<Tab>(Tab.OVERVIEW);
-  const reviews = REVIEW_LIST;
 
   const renderTabByType = () => {
     switch (activeTab) {
       case Tab.DETAILS:
         return <DetailsTab film={film} />;
       case Tab.REVIEWS:
-        return <ReviewsTab reviews={reviews} />;
+        return <ReviewsTab filmId={film.id} />;
       default:
         return <OverviewTab film={film} />;
     }
