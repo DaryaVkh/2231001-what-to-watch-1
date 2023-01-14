@@ -1,19 +1,10 @@
-import { FC, useEffect, useState } from 'react';
-import { getFilmReviews } from '../../common/api-functions';
-import { Review } from '../../types/review.type';
+import { FC } from 'react';
+import { useAppSelector } from '../../hooks/store-helpers';
+import { getFilmReviews } from '../../store/film/film-selectors';
 import ReviewCard from '../review-card/review-card';
 
-type Props = {
-  filmId: number;
-};
-
-const ReviewsTab: FC<Props> = (props) => {
-  const { filmId } = props;
-  const [reviews, setReviews] = useState<Review[]>([]);
-
-  useEffect(() => {
-    getFilmReviews(filmId).then(({data}) => setReviews(data));
-  }, []);
+const ReviewsTab: FC = () => {
+  const reviews = useAppSelector(getFilmReviews);
 
   return (
     <div className="film-card__reviews film-card__row">

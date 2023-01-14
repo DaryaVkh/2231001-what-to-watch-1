@@ -1,25 +1,31 @@
 export enum AppRoute {
-  MAIN = '/',
-  SIGN_IN = '/login',
-  MY_LIST = 'mylist',
-  FILM = 'films/:filmId',
-  ADD_REVIEW = 'review',
-  PLAYER = 'player/:filmId',
-  ERROR404 = '*'
+  Main = '/',
+  SignIn = '/login',
+  MyList = 'mylist',
+  Film = 'films/:filmId',
+  AddReview = 'review',
+  Player = 'player/:filmId',
+  Error404 = '*'
 }
 
 export enum AuthorizationStatus {
-  AUTH = 'AUTH',
-  NO_AUTH = 'NO_AUTH',
-  UNKNOWN = 'UNKNOWN',
+  Auth = 'Auth',
+  NoAuth = 'NoAuth',
+  Unknown = 'Unknown',
 }
 
 export enum APIRoute {
-  FILMS = '/films',
-  LOGIN = '/login',
-  LOGOUT = '/logout',
-  COMMENTS = '/comments',
-  PROMO = '/promo'
+  Films = '/films',
+  Login = '/login',
+  Logout = '/logout',
+  Comments = '/comments',
+  Promo = '/promo'
+}
+
+export enum NameSpace {
+  User = 'User',
+  App = 'App',
+  Film = 'Film'
 }
 
 export const VISIBLE_FILMS_COUNT_STEP = 8;
