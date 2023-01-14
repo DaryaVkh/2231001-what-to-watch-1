@@ -10,27 +10,28 @@ import MainPage from '../../pages/main/main-page';
 import MyListPage from '../../pages/my-list/my-list-page';
 import PlayerPage from '../../pages/player/player-page';
 import SignInPage from '../../pages/sign-in/sign-in-page';
+import { getFilms } from '../../store/app/app-selectors';
 import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 const App: FC = () => {
-  const { films } = useAppSelector((state) => state);
+  const films = useAppSelector(getFilms);
 
   return (
     <HistoryRouter history={browserHistory}>
       <ScrollToTop />
       <Routes>
-        <Route path={AppRoute.MAIN}>
+        <Route path={AppRoute.Main}>
           <Route index element={<MainPage />}/>
-          <Route path={AppRoute.SIGN_IN} element={<SignInPage />}/>
-          <Route path={AppRoute.MY_LIST} element={<PrivateRoute><MyListPage films={films} /></PrivateRoute>}/>
-          <Route path={AppRoute.FILM}>
+          <Route path={AppRoute.SignIn} element={<SignInPage />}/>
+          <Route path={AppRoute.MyList} element={<PrivateRoute><MyListPage films={films} /></PrivateRoute>}/>
+          <Route path={AppRoute.Film}>
             <Route index element={<FilmPage />}/>
-            <Route path={AppRoute.ADD_REVIEW} element={<AddReviewPage />}/>
+            <Route path={AppRoute.AddReview} element={<AddReviewPage />}/>
           </Route>
-          <Route path={AppRoute.PLAYER} element={<PlayerPage />}/>
-          <Route path={AppRoute.ERROR404} element={<Error404Page />}/>
+          <Route path={AppRoute.Player} element={<PlayerPage />}/>
+          <Route path={AppRoute.Error404} element={<Error404Page />}/>
         </Route>
       </Routes>
     </HistoryRouter>

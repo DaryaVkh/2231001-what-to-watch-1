@@ -1,34 +1,31 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getFilm, getSimilarFilms } from '../../common/api-functions';
-import { AppRoute, AuthorizationStatus } from '../../common/models';
+import { AuthorizationStatus } from '../../common/models';
 import FilmList from '../../components/film-list/film-list';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import Spinner from '../../components/spinner/spinner';
 import Tabs from '../../components/tabs/tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
-import { redirectToRoute } from '../../store/action';
-import { Film } from '../../types/film.type';
+import { fetchFilm, fetchFilmReviews, fetchSimilarFilms } from '../../store/api-actions';
+import { getFilm, getSimilarFilms } from '../../store/film/film-selectors';
+import { getAuthorizationStatus } from '../../store/user/user-selectors';
 
 const FilmPage: FC = () => {
   const params = useParams();
   const filmId = Number(params.filmId);
-  const [film, setFilm] = useState<Film>();
-  const [similarFilms, setSimilarFilms] = useState<Film[]>([]);
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const film = useAppSelector(getFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
 
   useEffect(() => {
-    getFilm(filmId).then(({ data }) => {
-      if (data) {
-        setFilm(data);
-      } else {
-        dispatch(redirectToRoute(AppRoute.ERROR404));
-      }
-    });
-    getSimilarFilms(filmId).then(({ data }) => setSimilarFilms(data));
-  }, [filmId]);
+    if (!film || film.id !== filmId) {
+      dispatch(fetchFilm(filmId));
+      dispatch(fetchSimilarFilms(filmId));
+      dispatch(fetchFilmReviews(filmId));
+    }
+  }, [film, dispatch, filmId]);
 
   if (!film) {
     return <Spinner />;
@@ -73,7 +70,7 @@ const FilmPage: FC = () => {
                   <span className="film-card__count">9</span>
                 </button>
                 {
-                  authorizationStatus === AuthorizationStatus.AUTH
+                  authorizationStatus === AuthorizationStatus.Auth
                     ? <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
                     : null
                 }

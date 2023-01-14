@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useCallback, useState } from 'react';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch } from '../../hooks/store-helpers';
 import { loginAction } from '../../store/api-actions';
@@ -9,25 +9,25 @@ const SignInPage: FC = () => {
   const [password, setPassword] = useState<string>('');
   const dispatch = useAppDispatch();
 
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-  };
+  }, []);
 
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-  };
+  }, []);
 
-  const onSubmit = (authData: AuthData) => {
+  const onSubmit = useCallback((authData: AuthData) => {
     dispatch(loginAction(authData));
-  };
+  }, [dispatch]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (email !== '' && password !== '') {
       onSubmit({ email, password });
     }
-  };
+  }, [email, password, onSubmit]);
 
   return (
     <div className="user-page">

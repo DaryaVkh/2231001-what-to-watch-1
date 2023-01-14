@@ -1,29 +1,22 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getFilm } from '../../common/api-functions';
 import { AppRoute } from '../../common/models';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
-import { useAppDispatch } from '../../hooks/store-helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
 import { redirectToRoute } from '../../store/action';
-import { Film } from '../../types/film.type';
+import { getFilm } from '../../store/film/film-selectors';
 
 const AddReviewPage: FC = () => {
   const params = useParams();
   const filmId = Number(params.filmId);
-  const [film, setFilm] = useState<Film | null>();
   const dispatch = useAppDispatch();
+  const film = useAppSelector(getFilm);
 
-  useEffect(() => {
-    getFilm(filmId).then(({ data }) => {
-      if (data) {
-        setFilm(data);
-      } else {
-        dispatch(redirectToRoute(AppRoute.ERROR404));
-      }
-    });
-  }, [filmId]);
+  if (!film) {
+    dispatch(redirectToRoute(AppRoute.Error404));
+  }
 
   return (
     <section className="film-card film-card--full">
@@ -57,7 +50,7 @@ const AddReviewPage: FC = () => {
       </div>
 
       <div className="add-review">
-        <AddReviewForm filmId={Number(filmId)} />
+        <AddReviewForm filmId={Number(filmId)}/>
       </div>
 
     </section>

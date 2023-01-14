@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { format } from 'date-fns';
+import { FC, useMemo } from 'react';
 import { Review } from '../../types/review.type';
 
 type Props = {
@@ -8,7 +8,9 @@ type Props = {
 
 const ReviewCard: FC<Props> = (props) => {
   const { review } = props;
-  const reviewDate = new Date(review.date);
+  const reviewDate = useMemo(() => new Date(review.date), [review]);
+  const dateTime = useMemo(() => format(reviewDate, 'yyyy-MM-dd'), [reviewDate]);
+  const time = useMemo(() => format(reviewDate, 'MMMM dd, yyyy'), [reviewDate]);
 
   return (
     <div className="review">
@@ -17,7 +19,7 @@ const ReviewCard: FC<Props> = (props) => {
 
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
-          <time className="review__date" dateTime={format(reviewDate, 'yyyy-MM-dd')}>{format(reviewDate, 'MMMM dd, yyyy')}</time>
+          <time className="review__date" dateTime={dateTime}>{time}</time>
         </footer>
       </blockquote>
 

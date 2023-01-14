@@ -1,11 +1,13 @@
-import { FC, SyntheticEvent } from 'react';
+import React, { FC, SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../common/models';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
 import { logoutAction } from '../../store/api-actions';
+import { getAuthorizationStatus, getUser } from '../../store/user/user-selectors';
 
 const HeaderUserBlock: FC = () => {
-  const { authorizationStatus, user } = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
   const dispatch = useAppDispatch();
 
   const handleSignOut = (event: SyntheticEvent) => {
@@ -17,8 +19,8 @@ const HeaderUserBlock: FC = () => {
   return (
     <ul className="user-block">
       {
-        authorizationStatus !== AuthorizationStatus.AUTH
-          ? <Link to={AppRoute.SIGN_IN} className="user-block__link">Sign in</Link>
+        authorizationStatus !== AuthorizationStatus.Auth
+          ? <Link to={AppRoute.SignIn} className="user-block__link">Sign in</Link>
           : (
             <>
               <li className="user-block__item">
@@ -36,4 +38,4 @@ const HeaderUserBlock: FC = () => {
   );
 };
 
-export default HeaderUserBlock;
+export default React.memo(HeaderUserBlock);

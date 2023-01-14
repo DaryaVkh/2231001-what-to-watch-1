@@ -1,5 +1,8 @@
-import { ChangeEvent, FC, FormEvent, Fragment, useState } from 'react';
-import { postFilmReview } from '../../common/api-functions';
+import { ChangeEvent, FC, FormEvent, Fragment, useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../common/models';
+import { useAppDispatch } from '../../hooks/store-helpers';
+import { postFilmReview } from '../../store/api-actions';
 
 type ReviewFormValue = {
   starsCount: number;
@@ -12,36 +15,40 @@ type Props = {
 
 const AddReviewForm: FC<Props> = (props) => {
   const { filmId } = props;
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [formValue, setFormValue] = useState<ReviewFormValue>({
     starsCount: 0,
     reviewText: ''
   });
 
-  const handleReviewTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleReviewTextChange = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormValue((prevValue) => ({
       ...prevValue,
       reviewText: event.target.value
     }));
-  };
+  }, []);
 
-  const handleStarsCountChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleStarsCountChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setFormValue((prevState) => ({
       ...prevState,
       starsCount: Number(event.target.value)
     }));
-  };
+  }, []);
 
-  const onSubmit = (review: ReviewFormValue) => {
-    postFilmReview(filmId, {comment: review.reviewText, rating: review.starsCount}).then();
-  };
+  const onSubmit = useCallback((review: ReviewFormValue) => {
+    dispatch(postFilmReview({ review: { comment: review.reviewText, rating: review.starsCount }, filmId })).then(() => {
+      navigate(`${AppRoute.Film}/${filmId}`);
+    });
+  }, [filmId, dispatch, navigate]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (formValue.reviewText && formValue.starsCount) {
       onSubmit(formValue);
     }
-  };
+  }, [formValue, onSubmit]);
 
   return (
     <form action="#" className="add-review__form" onSubmit={handleSubmit}>
