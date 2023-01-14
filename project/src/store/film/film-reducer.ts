@@ -23,6 +23,6 @@ export const filmReducer = createSlice({
       })
       .addCase(fetchFilmReviews.fulfilled, (state, action) => {
         state.reviews = action.payload;
-      })
+      });
   }
 });
