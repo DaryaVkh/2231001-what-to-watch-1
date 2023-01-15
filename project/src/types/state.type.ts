@@ -8,6 +8,7 @@ import { User } from './user.type';
 export type UserState = {
   authorizationStatus: AuthorizationStatus;
   user: User | null;
+  favoriteFilms: Film[];
 };
 
 export type FilmState = {

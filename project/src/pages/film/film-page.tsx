@@ -4,6 +4,7 @@ import { AuthorizationStatus } from '../../common/models';
 import FilmList from '../../components/film-list/film-list';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
+import MyListButton from '../../components/my-list-button/my-list-button';
 import Spinner from '../../components/spinner/spinner';
 import Tabs from '../../components/tabs/tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
@@ -56,19 +57,15 @@ const FilmPage: FC = () => {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link to={`/player/${filmId}`} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"/>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                </Link>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth ? <MyListButton/> : null
+                }
                 {
                   authorizationStatus === AuthorizationStatus.Auth
                     ? <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>

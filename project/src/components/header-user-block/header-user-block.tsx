@@ -24,12 +24,14 @@ const HeaderUserBlock: FC = () => {
           : (
             <>
               <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src={user?.avatarUrl} alt="User avatar" width="63" height="63"/>
-                </div>
+                <Link to="/mylist">
+                  <div className="user-block__avatar">
+                    <img src={user?.avatarUrl} alt="User avatar" width="63" height="63"/>
+                  </div>
+                </Link>
               </li>
               <li className="user-block__item">
-                <a href='/' className="user-block__link" onClick={handleSignOut}>Sign out</a>
+                <a href="/" className="user-block__link" onClick={handleSignOut}>Sign out</a>
               </li>
             </>
           )

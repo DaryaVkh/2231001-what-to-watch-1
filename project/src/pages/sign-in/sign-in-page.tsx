@@ -1,4 +1,6 @@
 import { ChangeEvent, FC, FormEvent, useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../common/models';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch } from '../../hooks/store-helpers';
 import { loginAction } from '../../store/api-actions';
@@ -8,6 +10,7 @@ const SignInPage: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleEmailChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -18,7 +21,9 @@ const SignInPage: FC = () => {
   }, []);
 
   const onSubmit = useCallback((authData: AuthData) => {
-    dispatch(loginAction(authData));
+    dispatch(loginAction(authData)).then(() => {
+      navigate(AppRoute.Main);
+    });
   }, [dispatch]);
 
   const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {

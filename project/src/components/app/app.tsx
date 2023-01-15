@@ -25,7 +25,7 @@ const App: FC = () => {
         <Route path={AppRoute.Main}>
           <Route index element={<MainPage />}/>
           <Route path={AppRoute.SignIn} element={<SignInPage />}/>
-          <Route path={AppRoute.MyList} element={<PrivateRoute><MyListPage films={films} /></PrivateRoute>}/>
+          <Route path={AppRoute.MyList} element={<PrivateRoute><MyListPage/></PrivateRoute>}/>
           <Route path={AppRoute.Film}>
             <Route index element={<FilmPage />}/>
             <Route path={AppRoute.AddReview} element={<AddReviewPage />}/>
