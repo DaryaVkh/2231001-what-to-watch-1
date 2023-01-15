@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import './spinner.css';
 
 const Spinner: FC = () => (
   <div className="spinner__background">

@@ -1,22 +1,26 @@
 import { FC, useEffect, useMemo, useState } from 'react';
+import { AuthorizationStatus } from '../../common/models';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
+import MyListButton from '../../components/my-list-button/my-list-button';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Spinner from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
-import { fetchPromoFilm } from '../../store/api-actions';
+import { fetchFavoriteFilms, fetchPromoFilm } from '../../store/api-actions';
 import { getFilms, getGenre, getIsLoading, getPromoFilm } from '../../store/app/app-selectors';
+import { getAuthorizationStatus } from '../../store/user/user-selectors';
 import { Genre } from '../../types/genre.enum';
 
 const MainPage: FC = () => {
   const genre = useAppSelector(getGenre);
   const films = useAppSelector(getFilms);
   const isLoading = useAppSelector(getIsLoading);
-  const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
   const promoFilm = useAppSelector(getPromoFilm);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
+  const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
 
   const filteredFilms = useMemo(
     () => films.filter((film) => film.genre === genre || genre === Genre.ALL_GENRES),
@@ -26,6 +30,7 @@ const MainPage: FC = () => {
   useEffect(() => {
     if (!promoFilm) {
       dispatch(fetchPromoFilm());
+      dispatch(fetchFavoriteFilms());
     }
   }, [dispatch, promoFilm]);
 
@@ -45,7 +50,7 @@ const MainPage: FC = () => {
         <header className="page-header film-card__head">
           <Logo/>
 
-          <HeaderUserBlock />
+          <HeaderUserBlock/>
         </header>
 
         <div className="film-card__wrap">
@@ -68,13 +73,9 @@ const MainPage: FC = () => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"/>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth ? <MyListButton/> : null
+                }
               </div>
             </div>
           </div>

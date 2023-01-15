@@ -1,22 +1,25 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
-import { Film } from '../../types/film.type';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { fetchFavoriteFilms } from '../../store/api-actions';
+import { getFavoriteFilms } from '../../store/user/user-selectors';
 
-type Props = {
-  films: Film[];
-};
+const MyListPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const films = useAppSelector(getFavoriteFilms);
 
-const MyListPage: FC<Props> = (props) => {
-  const { films } = props;
+  useEffect(() => {
+    dispatch(fetchFavoriteFilms());
+  }, [dispatch]);
 
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo/>
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{films.length}</span></h1>
         <HeaderUserBlock/>
       </header>
 
