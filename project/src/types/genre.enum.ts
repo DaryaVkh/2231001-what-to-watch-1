@@ -1,12 +1,12 @@
 export enum Genre {
-  ALL_GENRES = 'All genres',
-  COMEDY = 'Comedy',
-  CRIME = 'Crime',
-  DOCUMENTARY = 'Documentary',
-  DRAMA = 'Drama',
-  HORROR = 'Horror',
-  KIDS_AND_FAMILY = 'Kids & Family',
-  ROMANCE = 'Romance',
-  SCI_FI = 'Sci-fi',
-  THRILLER = 'Thriller'
+  AllGenres = 'All genres',
+  Comedy = 'Comedy',
+  Crime = 'Crime',
+  Documentary = 'Documentary',
+  Drama = 'Drama',
+  Horror = 'Horror',
+  KidsAndFamily = 'Kids & Family',
+  Romance = 'Romance',
+  Scifi = 'Sci-fi',
+  Thriller = 'Thriller'
 }

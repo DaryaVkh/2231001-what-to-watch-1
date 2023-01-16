@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { VISIBLE_FILMS_COUNT_STEP } from '../../common/models';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
-import { changeActiveGenre } from '../../store/action';
-import { getGenre } from '../../store/app/app-selectors';
+import { setActiveGenreAction } from '../../store/actions';
+import { getGenre } from '../../store/app-reducer/app-selectors';
 import { Genre } from '../../types/genre.enum';
 
 type Props = {
@@ -17,7 +17,7 @@ const GenreList: FC<Props> = (props) => {
   const dispatch = useAppDispatch();
 
   const handleGenreChange = (newGenre: string) => {
-    dispatch(changeActiveGenre({ newGenre: newGenre as Genre }));
+    dispatch(setActiveGenreAction({ newGenre: newGenre as Genre }));
     setVisibleFilmsCount(VISIBLE_FILMS_COUNT_STEP);
   };
 

@@ -11,20 +11,27 @@ type Props = {
 
 const VideoPlayer: FC<Props> = (props) => {
   const { film, muted, isPlaying, width, height } = props;
-
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (videoRef.current === null) {
-      return;
+    let isMounted = true;
+
+    if (isMounted) {
+      if (videoRef.current === null) {
+        return;
+      }
+
+      if (isPlaying) {
+        videoRef.current.play();
+        return;
+      }
+
+      videoRef.current.load();
     }
 
-    if (isPlaying) {
-      videoRef.current.play();
-      return;
-    }
-
-    videoRef.current.load();
+    return () => {
+      isMounted = false;
+    };
   }, [isPlaying]);
 
   return (

@@ -1,27 +1,21 @@
 import classNames from 'classnames';
 import { FC, useState } from 'react';
-import { Film } from '../../types/film.type';
 import { Tab } from '../../types/tab.enum';
 import DetailsTab from './details-tab';
 import OverviewTab from './overview-tab';
 import ReviewsTab from './reviews-tab';
 
-type Props = {
-  film: Film;
-};
-
-const Tabs: FC<Props> = (props) => {
-  const { film } = props;
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.OVERVIEW);
+const Tabs: FC = () => {
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.Overview);
 
   const renderTabByType = () => {
     switch (activeTab) {
-      case Tab.DETAILS:
-        return <DetailsTab film={film} />;
-      case Tab.REVIEWS:
-        return <ReviewsTab filmId={film.id} />;
+      case Tab.Details:
+        return <DetailsTab/>;
+      case Tab.Reviews:
+        return <ReviewsTab/>;
       default:
-        return <OverviewTab film={film} />;
+        return <OverviewTab/>;
     }
   };
 
@@ -34,14 +28,14 @@ const Tabs: FC<Props> = (props) => {
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          <li className={getTabClasses(Tab.OVERVIEW)}>
-            <span className="film-nav__link" onClick={() => setActiveTab(Tab.OVERVIEW)}>Overview</span>
+          <li className={getTabClasses(Tab.Overview)}>
+            <span className="film-nav__link" onClick={() => setActiveTab(Tab.Overview)}>Overview</span>
           </li>
-          <li className={getTabClasses(Tab.DETAILS)}>
-            <span className="film-nav__link" onClick={() => setActiveTab(Tab.DETAILS)}>Details</span>
+          <li className={getTabClasses(Tab.Details)}>
+            <span className="film-nav__link" onClick={() => setActiveTab(Tab.Details)}>Details</span>
           </li>
-          <li className={getTabClasses(Tab.REVIEWS)}>
-            <span className="film-nav__link" onClick={() => setActiveTab(Tab.REVIEWS)}>Reviews</span>
+          <li className={getTabClasses(Tab.Reviews)}>
+            <span className="film-nav__link" onClick={() => setActiveTab(Tab.Reviews)}>Reviews</span>
           </li>
         </ul>
       </nav>

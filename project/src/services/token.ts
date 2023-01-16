@@ -1,4 +1,4 @@
-const AUTH_TOKEN_KEY_NAME = 'guess-melody-token';
+const AUTH_TOKEN_KEY_NAME = 'what-to-watch-token';
 
 export type Token = string;
 

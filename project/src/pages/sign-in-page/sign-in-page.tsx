@@ -24,7 +24,7 @@ const SignInPage: FC = () => {
     dispatch(loginAction(authData)).then(() => {
       navigate(AppRoute.Main);
     });
-  }, [dispatch]);
+  }, [dispatch, navigate]);
 
   const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -46,11 +46,27 @@ const SignInPage: FC = () => {
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" value={email} onChange={handleEmailChange}/>
+              <input
+                className="sign-in__input"
+                type="email"
+                placeholder="Email address"
+                name="user-email"
+                id="user-email"
+                value={email}
+                onChange={handleEmailChange}
+              />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" value={password} onChange={handlePasswordChange}/>
+              <input
+                className="sign-in__input"
+                type="password"
+                placeholder="Password"
+                name="user-password"
+                id="user-password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>

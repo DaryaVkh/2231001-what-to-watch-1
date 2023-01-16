@@ -1,5 +1,5 @@
 export enum Tab {
-  OVERVIEW = 'overview',
-  DETAILS = 'details',
-  REVIEWS = 'reviews'
+  Overview = 'overview',
+  Details = 'details',
+  Reviews = 'reviews'
 }

@@ -2,8 +2,8 @@ import moment from 'moment';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
-import { fetchFilm } from '../../store/api-actions';
-import { getFilm } from '../../store/film/film-selectors';
+import { fetchFilmAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { getFilm } from '../../store/film-reducer/film-selectors';
 
 const PlayerPage: FC = () => {
   const params = useParams();
@@ -16,7 +16,17 @@ const PlayerPage: FC = () => {
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
   useEffect(() => {
-    dispatch(fetchFilm(Number(filmId)));
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchFilmAction(Number(filmId)));
+      dispatch(fetchFilmReviewsAction(Number(filmId)));
+      dispatch(fetchSimilarFilmsAction(Number(filmId)));
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, filmId]);
 
   const handleTimeUpdate = useCallback(() => {
@@ -37,9 +47,9 @@ const PlayerPage: FC = () => {
 
   const formatProgressTime = useCallback((seconds: number) => {
     if (seconds / 60 / 60 < 1) {
-      return moment(seconds * 1000).format('mm:ss');
+      return moment(seconds * 1000).format('-mm:ss');
     }
-    return moment(seconds * 1000).format('h:mm:ss');
+    return moment(seconds * 1000).format('-hh:mm:ss');
   }, []);
 
   const toggleIsPlaying = useCallback(() => {

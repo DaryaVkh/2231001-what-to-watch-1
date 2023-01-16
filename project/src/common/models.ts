@@ -30,3 +30,5 @@ export enum NameSpace {
 }
 
 export const VISIBLE_FILMS_COUNT_STEP = 8;
+
+export const MAX_SIMILAR_FILMS_COUNT = 4;
