@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/store-helpers';
-import { getFilmReviews } from '../../store/film/film-selectors';
+import { getFilmReviews } from '../../store/film-reducer/film-selectors';
 import ReviewCard from '../review-card/review-card';
 
 const ReviewsTab: FC = () => {

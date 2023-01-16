@@ -22,7 +22,7 @@ const FilmCard: FC<Props> = (props) => {
       setTimeout(() => startPlaying && setIsPlayingPreview(true), DELAY_BEFORE_PLAYING_PREVIEW);
     }
 
-    return(() => {
+    return (() => {
       startPlaying = false;
     });
   }, [isStartToPlayPreview]);
@@ -40,12 +40,14 @@ const FilmCard: FC<Props> = (props) => {
 
   return (
     <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="small-film-card__image">
-        <VideoPlayer muted film={film} isPlaying={isPlayingPreview} width={280} height={175}/>
-      </div>
-      <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
-      </h3>
+      <Link to={`/films/${film.id}`} style={{textDecoration: 'none', color: 'inherit'}}>
+        <div className="small-film-card__image">
+          <VideoPlayer muted film={film} isPlaying={isPlayingPreview} width={280} height={175}/>
+        </div>
+        <h3 className="small-film-card__title">
+          <span className="small-film-card__link">{film.name}</span>
+        </h3>
+      </Link>
     </article>
   );
 };

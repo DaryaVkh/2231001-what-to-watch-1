@@ -1,22 +1,45 @@
-import { FC } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { AppRoute } from '../../common/models';
+import { FC, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { APIRoute } from '../../common/models';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
-import { redirectToRoute } from '../../store/action';
-import { getFilm } from '../../store/film/film-selectors';
+import { checkAuthAction, fetchFilmAction } from '../../store/api-actions';
+import { getFilm } from '../../store/film-reducer/film-selectors';
 
 const AddReviewPage: FC = () => {
   const params = useParams();
   const filmId = Number(params.filmId);
-  const dispatch = useAppDispatch();
   const film = useAppSelector(getFilm);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  if (!film) {
-    dispatch(redirectToRoute(AppRoute.Error404));
-  }
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted && !film) {
+      dispatch(fetchFilmAction(filmId));
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [film, dispatch, filmId]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(checkAuthAction()).catch(() => {
+        navigate(APIRoute.Login);
+      });
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, navigate]);
 
   return (
     <section className="film-card film-card--full">

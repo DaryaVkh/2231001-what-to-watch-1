@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../common/models';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
 import { logoutAction } from '../../store/api-actions';
-import { getAuthorizationStatus, getUser } from '../../store/user/user-selectors';
+import { getAuthorizationStatus, getUser } from '../../store/user-reducer/user-selectors';
 
 const HeaderUserBlock: FC = () => {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);

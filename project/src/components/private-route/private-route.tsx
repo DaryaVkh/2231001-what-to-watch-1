@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../common/models';
 import { useAppSelector } from '../../hooks/store-helpers';
-import { getAuthorizationStatus } from '../../store/user/user-selectors';
+import { getAuthorizationStatus } from '../../store/user-reducer/user-selectors';
 
 type Props = {
   children: JSX.Element;

@@ -1,16 +1,17 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { AuthorizationStatus } from '../../common/models';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
+import PlayButton from '../../components/play-button/play-button';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Spinner from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
-import { fetchFavoriteFilms, fetchPromoFilm } from '../../store/api-actions';
-import { getFilms, getGenre, getIsLoading, getPromoFilm } from '../../store/app/app-selectors';
-import { getAuthorizationStatus } from '../../store/user/user-selectors';
+import { fetchPromoFilmAction } from '../../store/api-actions';
+import { getFilms, getGenre, getIsLoading, getPromoFilm } from '../../store/app-reducer/app-selectors';
+import { getAuthorizationStatus } from '../../store/user-reducer/user-selectors';
 import { Genre } from '../../types/genre.enum';
 
 const MainPage: FC = () => {
@@ -21,20 +22,24 @@ const MainPage: FC = () => {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const [visibleFilmsCount, setVisibleFilmsCount] = useState<number>(8);
-
   const filteredFilms = useMemo(
-    () => films.filter((film) => film.genre === genre || genre === Genre.ALL_GENRES),
+    () => films.filter((film) => film.genre === genre || genre === Genre.AllGenres),
     [films, genre]
   );
 
   useEffect(() => {
-    if (!promoFilm) {
-      dispatch(fetchPromoFilm());
-      dispatch(fetchFavoriteFilms());
-    }
-  }, [dispatch, promoFilm]);
+    let isMounted = true;
 
-  if (isLoading || !promoFilm) {
+    if (isMounted && !promoFilm) {
+      dispatch(fetchPromoFilmAction());
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, promoFilm, authorizationStatus]);
+
+  if (isLoading) {
     return <Spinner/>;
   }
 
@@ -42,7 +47,7 @@ const MainPage: FC = () => {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promoFilm.backgroundImage} alt={promoFilm.name}/>
+          <img src={promoFilm?.backgroundImage} alt={promoFilm?.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -56,23 +61,18 @@ const MainPage: FC = () => {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilm.posterImage} alt={promoFilm.name} width="218" height="327"/>
+              <img src={promoFilm?.posterImage} alt={promoFilm?.name} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilm.name}</h2>
+              <h2 className="film-card__title">{promoFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilm.genre}</span>
-                <span className="film-card__year">{promoFilm.released}</span>
+                <span className="film-card__genre">{promoFilm?.genre}</span>
+                <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"/>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <PlayButton/>
                 {
                   authorizationStatus === AuthorizationStatus.Auth ? <MyListButton/> : null
                 }
@@ -86,7 +86,7 @@ const MainPage: FC = () => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList genreList={[Genre.ALL_GENRES, ...new Set(films.map((film) => film.genre))]} setVisibleFilmsCount={setVisibleFilmsCount}/>
+          <GenreList genreList={[Genre.AllGenres, ...new Set(films.map((film) => film.genre))]} setVisibleFilmsCount={setVisibleFilmsCount}/>
 
           <FilmList films={filteredFilms.slice(0, visibleFilmsCount)}/>
 

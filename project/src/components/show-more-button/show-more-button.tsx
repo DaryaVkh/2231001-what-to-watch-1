@@ -11,7 +11,13 @@ const ShowMoreButton: FC<Props> = (props) => {
 
   return (
     <div className="catalog__more" style={{display: isVisible ? 'block' : 'none'}}>
-      <button className="catalog__button" type="button" onClick={() => setVisibleFilmsCount((prev) => prev + VISIBLE_FILMS_COUNT_STEP)}>Show more</button>
+      <button
+        className="catalog__button"
+        type="button"
+        onClick={() => setVisibleFilmsCount((prev) => prev + VISIBLE_FILMS_COUNT_STEP)}
+      >
+        Show more
+      </button>
     </div>
   );
 };

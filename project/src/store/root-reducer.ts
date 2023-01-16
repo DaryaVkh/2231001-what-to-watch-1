@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../common/models';
-import { appReducer } from './app/app-reducer';
-import { filmReducer } from './film/film-reducer';
-import { userReducer } from './user/user-reducer';
+import { appReducer } from './app-reducer/app-reducer';
+import { filmReducer } from './film-reducer/film-reducer';
+import { userReducer } from './user-reducer/user-reducer';
 
 const rootReducer = combineReducers({
   [NameSpace.App]: appReducer.reducer,

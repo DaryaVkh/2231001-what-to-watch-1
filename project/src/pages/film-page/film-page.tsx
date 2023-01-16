@@ -5,12 +5,13 @@ import FilmList from '../../components/film-list/film-list';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
+import PlayButton from '../../components/play-button/play-button';
 import Spinner from '../../components/spinner/spinner';
 import Tabs from '../../components/tabs/tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
-import { fetchFilm, fetchFilmReviews, fetchSimilarFilms } from '../../store/api-actions';
-import { getFilm, getSimilarFilms } from '../../store/film/film-selectors';
-import { getAuthorizationStatus } from '../../store/user/user-selectors';
+import { fetchFilmAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { getFilm, getSimilarFilms } from '../../store/film-reducer/film-selectors';
+import { getAuthorizationStatus } from '../../store/user-reducer/user-selectors';
 
 const FilmPage: FC = () => {
   const params = useParams();
@@ -21,11 +22,17 @@ const FilmPage: FC = () => {
   const similarFilms = useAppSelector(getSimilarFilms);
 
   useEffect(() => {
-    if (!film || film.id !== filmId) {
-      dispatch(fetchFilm(filmId));
-      dispatch(fetchSimilarFilms(filmId));
-      dispatch(fetchFilmReviews(filmId));
+    let isMounted = true;
+
+    if (isMounted && (!film || film.id !== filmId)) {
+      dispatch(fetchFilmAction(filmId));
+      dispatch(fetchSimilarFilmsAction(filmId));
+      dispatch(fetchFilmReviewsAction(filmId));
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [film, dispatch, filmId]);
 
   if (!film) {
@@ -57,12 +64,7 @@ const FilmPage: FC = () => {
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`/player/${filmId}`} className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"/>
-                  </svg>
-                  <span>Play</span>
-                </Link>
+                <PlayButton/>
                 {
                   authorizationStatus === AuthorizationStatus.Auth ? <MyListButton/> : null
                 }
@@ -83,7 +85,7 @@ const FilmPage: FC = () => {
             </div>
 
             <div className="film-card__desc">
-              <Tabs film={film}/>
+              <Tabs/>
             </div>
           </div>
         </div>
