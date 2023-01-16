@@ -8,7 +8,7 @@ import { Genre } from '../../types/genre.enum';
 import { makeFakeFilm } from '../../utils/mocks';
 import App from './app';
 
-const middlewares = [thunk]
+const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const fakeFilm = makeFakeFilm();
 

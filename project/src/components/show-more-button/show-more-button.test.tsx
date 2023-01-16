@@ -7,7 +7,7 @@ describe('Component test: ShowMoreButton', () => {
     const initialEntries = ['/'];
     render(
       <MemoryRouter initialEntries={initialEntries}>
-        <ShowMoreButton isVisible={true} setVisibleFilmsCount={jest.fn()}/>
+        <ShowMoreButton isVisible setVisibleFilmsCount={jest.fn()}/>
       </MemoryRouter>
     );
 

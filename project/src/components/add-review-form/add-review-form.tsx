@@ -92,11 +92,7 @@ const AddReviewForm: FC<Props> = (props) => {
           onChange={handleReviewTextChange}
         />
         <div className="add-review__submit">
-          {
-            isPostButtonDisabled || isFormDisabled
-              ? <button className="add-review__btn" type="submit" disabled>Post</button>
-              : <button className="add-review__btn" type="submit">Post</button>
-          }
+          <button className="add-review__btn" type="submit" disabled={isPostButtonDisabled || isFormDisabled}>Post</button>
         </div>
       </div>
     </form>
