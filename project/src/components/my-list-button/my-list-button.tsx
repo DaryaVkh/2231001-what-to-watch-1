@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   changeFilmStatusAction,
   fetchFavoriteFilmsAction,

@@ -35,7 +35,15 @@ const VideoPlayer: FC<Props> = (props) => {
   }, [isPlaying]);
 
   return (
-    <video ref={videoRef} src={film.videoLink} poster={film.posterImage} muted={muted} width={width} height={height}/>
+    <video
+      ref={videoRef}
+      src={film.videoLink}
+      poster={film.posterImage}
+      muted={muted}
+      width={width}
+      height={height}
+      data-testid="video-player"
+    />
   );
 };
 

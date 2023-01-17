@@ -1,4 +1,4 @@
-import { AuthorizationStatus, NameSpace } from '../../common/models';
+import { AuthorizationStatus, NameSpace } from '../../common/enums';
 import { Film } from '../../types/film.type';
 import { State } from '../../types/state.type';
 import { User } from '../../types/user.type';

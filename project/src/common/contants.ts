@@ -1,0 +1,6 @@
+export const VISIBLE_FILMS_COUNT_STEP = 8;
+export const MAX_SIMILAR_FILMS_COUNT = 4;
+export const MAX_REVIEW_SYMBOLS_COUNT = 400;
+export const MIN_REVIEW_SYMBOLS_COUNT = 50;
+export const REVIEWS_COLUMNS_COUNT = 3;
+export const MAX_VISIBLE_FILMS_DEFAULT = 8;

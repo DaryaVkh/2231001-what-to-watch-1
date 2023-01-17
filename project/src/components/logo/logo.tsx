@@ -6,8 +6,7 @@ type Props = {
   light?: boolean;
 };
 
-const Logo: FC<Props> = (props) => {
-  const { light } = props;
+const Logo: FC<Props> = ({ light }) => {
   const logoLinkClasses = classNames({
     'logo__link': true,
     'logo__link--light': light

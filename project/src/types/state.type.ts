@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../common/models';
+import { AuthorizationStatus } from '../common/enums';
 import { store } from '../store';
 import { Film } from './film.type';
 import { Genre } from './genre.enum';

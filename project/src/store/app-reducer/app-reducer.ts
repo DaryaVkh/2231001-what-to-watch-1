@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../common/models';
+import { NameSpace } from '../../common/enums';
 import { Genre } from '../../types/genre.enum';
 import { AppState } from '../../types/state.type';
 import { setActiveGenreAction, setFilmsAction, setIsLoadingAction, setPromoFilmAction } from '../actions';

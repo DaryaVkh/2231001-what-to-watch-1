@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../common/models';
-import { useAppSelector } from '../../hooks/store-helpers';
+import { AppRoute, AuthorizationStatus } from '../../common/enums';
+import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-reducer/user-selectors';
 
 type Props = {

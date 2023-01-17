@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { Tab } from '../../types/tab.enum';
-import DetailsTab from './details-tab';
-import OverviewTab from './overview-tab';
-import ReviewsTab from './reviews-tab';
+import DetailsTab from './details-tab/details-tab';
+import OverviewTab from './overview-tab/overview-tab';
+import ReviewsTab from './reviews-tab/reviews-tab';
 
 const Tabs: FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.Overview);

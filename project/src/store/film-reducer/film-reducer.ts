@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../common/models';
+import { NameSpace } from '../../common/enums';
 import { FilmState } from '../../types/state.type';
 import { setFilmAction, setFilmReviewsAction, setSimilarFilmsAction } from '../actions';
 

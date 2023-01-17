@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../../common/models';
+import { AuthorizationStatus } from '../../common/enums';
 import { UserState } from '../../types/state.type';
 import { makeFakeFilm, makeFakeUser } from '../../utils/mocks';
 import { setAuthorizationStatusAction, setFavoriteFilmsAction, setUserAction } from '../actions';

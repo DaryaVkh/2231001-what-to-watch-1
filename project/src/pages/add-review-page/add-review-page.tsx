@@ -1,19 +1,25 @@
 import { FC, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { APIRoute } from '../../common/models';
+import { APIRoute, AuthorizationStatus } from '../../common/enums';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { checkAuthAction, fetchFilmAction } from '../../store/api-actions';
 import { getFilm } from '../../store/film-reducer/film-selectors';
+import { getAuthorizationStatus } from '../../store/user-reducer/user-selectors';
 
 const AddReviewPage: FC = () => {
   const params = useParams();
   const filmId = Number(params.filmId);
   const film = useAppSelector(getFilm);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  if (authorizationStatus !== AuthorizationStatus.Auth) {
+    navigate(APIRoute.Login);
+  }
 
   useEffect(() => {
     let isMounted = true;
@@ -31,9 +37,7 @@ const AddReviewPage: FC = () => {
     let isMounted = true;
 
     if (isMounted) {
-      dispatch(checkAuthAction()).catch(() => {
-        navigate(APIRoute.Login);
-      });
+      dispatch(checkAuthAction());
     }
 
     return () => {

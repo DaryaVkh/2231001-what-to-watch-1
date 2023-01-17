@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { getRatingCategoryByRating } from '../../common/functions';
-import { useAppSelector } from '../../hooks/store-helpers';
-import { getFilm } from '../../store/film-reducer/film-selectors';
+import { getRatingCategoryByRating } from '../../../common/functions';
+import { useAppSelector } from '../../../hooks';
+import { getFilm } from '../../../store/film-reducer/film-selectors';
 
 const OverviewTab: FC = () => {
   const film = useAppSelector(getFilm);
@@ -9,7 +9,7 @@ const OverviewTab: FC = () => {
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{film?.rating}</div>
+        <div className="film-rating__score">{film?.rating.toFixed(1)}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{getRatingCategoryByRating(film?.rating || 10)}</span>
           <span className="film-rating__count">{film?.scoresCount}</span>

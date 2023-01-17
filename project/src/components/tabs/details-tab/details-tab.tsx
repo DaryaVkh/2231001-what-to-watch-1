@@ -1,9 +1,11 @@
-import { FC } from 'react';
-import { useAppSelector } from '../../hooks/store-helpers';
-import { getFilm } from '../../store/film-reducer/film-selectors';
+import moment from 'moment';
+import { FC, useMemo } from 'react';
+import { useAppSelector } from '../../../hooks';
+import { getFilm } from '../../../store/film-reducer/film-selectors';
 
 const DetailsTab: FC = () => {
   const film = useAppSelector(getFilm);
+  const filmDuration = useMemo(() => moment.duration(film?.runTime, 'minutes'), [film]);
 
   return (
     <div className="film-card__text film-card__row">
@@ -15,7 +17,7 @@ const DetailsTab: FC = () => {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {film?.starring.join(',\n').split('\n').map((actor) => <div key={actor}>{actor}</div>)}
+            {film?.starring.join(',\n').split('\n').map((actor) => <span key={actor} style={{display: 'block'}}>{actor}</span>)}
           </span>
         </p>
       </div>
@@ -23,7 +25,7 @@ const DetailsTab: FC = () => {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film?.runTime}</span>
+          <span className="film-card__details-value">{`${filmDuration.hours()}h ${filmDuration.minutes()}m`}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

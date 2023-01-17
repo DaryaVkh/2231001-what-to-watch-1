@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/store-helpers';
+import { useAppSelector } from '../../hooks';
 import { getPromoFilm } from '../../store/app-reducer/app-selectors';
 
 const PlayButton: FC = () => {

@@ -1,7 +1,7 @@
 import React, { FC, SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../common/models';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { AppRoute, AuthorizationStatus } from '../../common/enums';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getUser } from '../../store/user-reducer/user-selectors';
 

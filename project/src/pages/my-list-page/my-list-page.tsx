@@ -2,7 +2,8 @@ import { FC, useEffect } from 'react';
 import FilmCard from '../../components/film-card/film-card';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import PageFooter from '../../components/page-footer/page-footer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 import { getFavoriteFilms } from '../../store/user-reducer/user-selectors';
 
@@ -41,13 +42,7 @@ const MyListPage: FC = () => {
         </div>
       </section>
 
-      <footer className="page-footer">
-        <Logo light/>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <PageFooter isLogoLight/>
     </div>
   );
 };
