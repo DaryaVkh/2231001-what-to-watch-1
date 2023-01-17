@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import { getFilm } from '../../store/film-reducer/film-selectors';
 

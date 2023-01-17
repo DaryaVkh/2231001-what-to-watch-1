@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Dispatch, FC, SetStateAction } from 'react';
-import { VISIBLE_FILMS_COUNT_STEP } from '../../common/models';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { VISIBLE_FILMS_COUNT_STEP } from '../../common/contants';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setActiveGenreAction } from '../../store/actions';
 import { getGenre } from '../../store/app-reducer/app-selectors';
 import { Genre } from '../../types/genre.enum';

@@ -1,6 +1,7 @@
 import { ChangeEvent, FC, FormEvent, Fragment, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/store-helpers';
+import { MAX_REVIEW_SYMBOLS_COUNT, MIN_REVIEW_SYMBOLS_COUNT } from '../../common/contants';
+import { useAppDispatch } from '../../hooks';
 import { fetchFilmReviewsAction, postFilmReviewAction } from '../../store/api-actions';
 
 type ReviewFormValue = {
@@ -25,7 +26,11 @@ const AddReviewForm: FC<Props> = (props) => {
 
   const handleReviewTextChange = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
     const reviewText = event.target.value;
-    setIsPostButtonDisabled(reviewText.length < 50 || reviewText.length > 400 || formValue.starsCount === 0);
+    setIsPostButtonDisabled(
+      reviewText.length < MIN_REVIEW_SYMBOLS_COUNT ||
+      reviewText.length > MAX_REVIEW_SYMBOLS_COUNT ||
+      formValue.starsCount === 0
+    );
     setFormValue((prevValue) => ({
       ...prevValue,
       reviewText
@@ -33,7 +38,7 @@ const AddReviewForm: FC<Props> = (props) => {
   }, [formValue]);
 
   const handleStarsCountChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    setIsPostButtonDisabled(formValue.reviewText.length < 50 || formValue.reviewText.length > 400);
+    setIsPostButtonDisabled(formValue.reviewText.length < MIN_REVIEW_SYMBOLS_COUNT || formValue.reviewText.length > MAX_REVIEW_SYMBOLS_COUNT);
     setFormValue((prevState) => ({
       ...prevState,
       starsCount: Number(event.target.value)

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../common/models';
-import { useAppDispatch } from '../../hooks/store-helpers';
+import { AppRoute } from '../../common/enums';
+import { useAppDispatch } from '../../hooks';
 import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import Error404Page from '../../pages/error-404-page/error-404-page';
 import FilmPage from '../../pages/film-page/film-page';

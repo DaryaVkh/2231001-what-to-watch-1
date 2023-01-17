@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../common/models';
+import { AuthorizationStatus } from '../common/enums';
 import { Film } from '../types/film.type';
 import { Genre } from '../types/genre.enum';
 import { Review } from '../types/review.type';

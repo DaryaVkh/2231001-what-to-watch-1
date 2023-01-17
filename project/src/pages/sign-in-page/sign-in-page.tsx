@@ -1,8 +1,9 @@
 import { ChangeEvent, FC, FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../common/models';
+import { AppRoute } from '../../common/enums';
 import Logo from '../../components/logo/logo';
-import { useAppDispatch } from '../../hooks/store-helpers';
+import PageFooter from '../../components/page-footer/page-footer';
+import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data.type';
 
@@ -76,13 +77,7 @@ const SignInPage: FC = () => {
         </form>
       </div>
 
-      <footer className="page-footer">
-        <Logo light/>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <PageFooter isLogoLight/>
     </div>
   );
 };

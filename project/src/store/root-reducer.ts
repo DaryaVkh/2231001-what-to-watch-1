@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { NameSpace } from '../common/models';
+import { NameSpace } from '../common/enums';
 import { appReducer } from './app-reducer/app-reducer';
 import { filmReducer } from './film-reducer/film-reducer';
 import { userReducer } from './user-reducer/user-reducer';

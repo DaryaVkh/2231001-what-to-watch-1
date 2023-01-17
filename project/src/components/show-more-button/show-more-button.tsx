@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from 'react';
-import { VISIBLE_FILMS_COUNT_STEP } from '../../common/models';
+import { VISIBLE_FILMS_COUNT_STEP } from '../../common/contants';
 
 type Props = {
   isVisible: boolean;

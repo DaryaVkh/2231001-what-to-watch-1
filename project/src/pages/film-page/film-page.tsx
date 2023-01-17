@@ -1,14 +1,15 @@
 import { FC, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { AuthorizationStatus } from '../../common/models';
+import { AuthorizationStatus } from '../../common/enums';
 import FilmList from '../../components/film-list/film-list';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
+import PageFooter from '../../components/page-footer/page-footer';
 import PlayButton from '../../components/play-button/play-button';
 import Spinner from '../../components/spinner/spinner';
 import Tabs from '../../components/tabs/tabs';
-import { useAppDispatch, useAppSelector } from '../../hooks/store-helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import { getFilm, getSimilarFilms } from '../../store/film-reducer/film-selectors';
 import { getAuthorizationStatus } from '../../store/user-reducer/user-selectors';
@@ -97,13 +98,7 @@ const FilmPage: FC = () => {
           <FilmList films={similarFilms}/>
         </section>
 
-        <footer className="page-footer">
-          <Logo/>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <PageFooter isLogoLight/>
       </div>
     </>
   );

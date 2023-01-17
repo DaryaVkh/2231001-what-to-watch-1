@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { toast } from 'react-toastify';
-import { APIRoute, AuthorizationStatus, MAX_SIMILAR_FILMS_COUNT } from '../common/models';
+import { MAX_SIMILAR_FILMS_COUNT } from '../common/contants';
+import { APIRoute, AuthorizationStatus } from '../common/enums';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data.type';
 import { Film } from '../types/film.type';

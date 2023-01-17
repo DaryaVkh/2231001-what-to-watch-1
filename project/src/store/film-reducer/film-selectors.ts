@@ -1,4 +1,4 @@
-import { NameSpace } from '../../common/models';
+import { NameSpace } from '../../common/enums';
 import { Film } from '../../types/film.type';
 import { Review } from '../../types/review.type';
 import { State } from '../../types/state.type';

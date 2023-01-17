@@ -9,5 +9,4 @@ const Error404Page: FC = () => (
   </section>
 );
 
-
 export default Error404Page;

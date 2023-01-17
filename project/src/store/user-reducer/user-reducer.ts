@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthorizationStatus, NameSpace } from '../../common/models';
+import { AuthorizationStatus, NameSpace } from '../../common/enums';
 import { UserState } from '../../types/state.type';
 import { setAuthorizationStatusAction, setFavoriteFilmsAction, setUserAction } from '../actions';
 

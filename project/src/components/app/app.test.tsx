@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import { AuthorizationStatus, NameSpace } from '../../common/models';
+import { AuthorizationStatus, NameSpace } from '../../common/enums';
 import { Genre } from '../../types/genre.enum';
 import { makeFakeFilm } from '../../utils/mocks';
 import App from './app';
