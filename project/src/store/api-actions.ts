@@ -21,27 +21,6 @@ import {
   setUserAction
 } from './actions';
 
-export const fetchFilmsAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance
-}>(
-  'app/fetchFilms',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(setIsLoadingAction(true));
-
-    try {
-      const { data } = await api.get<Film[]>(APIRoute.Films);
-      dispatch(setFilmsAction(data));
-    } catch {
-      dispatch(setFilmsAction([]));
-      toast.error('Can`t load films');
-    } finally {
-      dispatch(setIsLoadingAction(false));
-    }
-  },
-);
-
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
   state: State,
@@ -104,6 +83,8 @@ export const fetchFilmAction = createAsyncThunk<void, number, {
 }>(
   'film/fetchFilm',
   async (filmId, { dispatch, extra: api }) => {
+    dispatch(setIsLoadingAction(true));
+
     try {
       const { data } = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
       dispatch(setFilmAction(data));
@@ -112,6 +93,8 @@ export const fetchFilmAction = createAsyncThunk<void, number, {
       dispatch(setSimilarFilmsAction([]));
       dispatch(setFilmReviewsAction([]));
       toast.error('Can`t load film');
+    } finally {
+      dispatch(setIsLoadingAction(false));
     }
   },
 );
@@ -144,6 +127,27 @@ export const fetchFilmReviewsAction = createAsyncThunk<void, number, {
       dispatch(setFilmReviewsAction(data));
     } catch {
       toast.error('Can`t load film reviews');
+    }
+  },
+);
+
+export const fetchFilmsAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'app/fetchFilms',
+  async (_arg, { dispatch, extra: api }) => {
+    dispatch(setIsLoadingAction(true));
+
+    try {
+      const { data } = await api.get<Film[]>(APIRoute.Films);
+      dispatch(setFilmsAction(data));
+    } catch {
+      dispatch(setFilmsAction([]));
+      toast.error('Can`t load films');
+    } finally {
+      dispatch(setIsLoadingAction(false));
     }
   },
 );
