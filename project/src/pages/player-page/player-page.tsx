@@ -14,7 +14,7 @@ const PlayerPage: FC = () => {
   const isLoading = useAppSelector(getIsLoading);
   const dispatch = useAppDispatch();
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [progress, setProgress] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
@@ -73,6 +73,8 @@ const PlayerPage: FC = () => {
       <video
         src={film?.videoLink}
         ref={videoRef}
+        autoPlay
+        muted
         className="player__video"
         poster={film?.posterImage}
         onTimeUpdate={() => handleTimeUpdate()}
