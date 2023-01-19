@@ -17,6 +17,9 @@ const fakeReview = makeFakeReview();
 const store = mockStore({
   [NameSpace.Film]: {
     film: fakeFilm
+  },
+  [NameSpace.App]: {
+    isLoading: false
   }
 });
 
