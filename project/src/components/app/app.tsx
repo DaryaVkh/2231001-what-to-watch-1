@@ -30,7 +30,7 @@ const App: FC = () => {
           <Route path={AppRoute.MyList} element={<PrivateRoute><MyListPage/></PrivateRoute>}/>
           <Route path={AppRoute.Film}>
             <Route index element={<FilmPage/>}/>
-            <Route path={AppRoute.AddReview} element={<AddReviewPage/>}/>
+            <Route path={AppRoute.AddReview} element={<PrivateRoute><AddReviewPage/></PrivateRoute>}/>
           </Route>
           <Route path={AppRoute.Player} element={<PlayerPage/>}/>
           <Route path={AppRoute.Error404} element={<Error404Page/>}/>

@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, FormEvent, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../common/enums';
 import Logo from '../../components/logo/logo';
 import PageFooter from '../../components/page-footer/page-footer';
@@ -12,12 +12,7 @@ const SignInPage: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    navigate(AppRoute.Main);
-  }
 
   const handleEmailChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -28,10 +23,8 @@ const SignInPage: FC = () => {
   }, []);
 
   const onSubmit = useCallback((authData: AuthData) => {
-    dispatch(loginAction(authData)).then(() => {
-      navigate(AppRoute.Main);
-    });
-  }, [dispatch, navigate]);
+    dispatch(loginAction(authData));
+  }, [dispatch]);
 
   const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,6 +33,10 @@ const SignInPage: FC = () => {
       onSubmit({ email, password });
     }
   }, [email, password, onSubmit]);
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Main}/>;
+  }
 
   return (
     <div className="user-page">

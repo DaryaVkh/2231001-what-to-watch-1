@@ -6,6 +6,7 @@ import { getFilm } from '../../../store/film-reducer/film-selectors';
 const DetailsTab: FC = () => {
   const film = useAppSelector(getFilm);
   const filmDuration = useMemo(() => moment.duration(film?.runTime, 'minutes'), [film]);
+  const starring = film?.starring || [];
 
   return (
     <div className="film-card__text film-card__row">
@@ -17,7 +18,12 @@ const DetailsTab: FC = () => {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {film?.starring.join(',\n').split('\n').map((actor) => <span key={actor} style={{display: 'block'}}>{actor}</span>)}
+            {
+              starring.slice(0, 3)
+                .join(',\n')
+                .split('\n')
+                .map((actor, i) => <span key={actor} style={{display: 'block'}}>{`${actor}${i === starring.length - 1 ? '.' : ''}`}</span>)
+            }
           </span>
         </p>
       </div>
