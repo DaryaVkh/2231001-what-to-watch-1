@@ -1,14 +1,17 @@
 import moment from 'moment';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Spinner from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { getIsLoading } from '../../store/app-reducer/app-selectors';
 import { getFilm } from '../../store/film-reducer/film-selectors';
 
 const PlayerPage: FC = () => {
   const params = useParams();
   const filmId = Number(params.filmId);
   const film = useAppSelector(getFilm);
+  const isLoading = useAppSelector(getIsLoading);
   const dispatch = useAppDispatch();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -60,6 +63,10 @@ const PlayerPage: FC = () => {
     }
     setIsPlaying((prev) => !prev);
   }, []);
+
+  if (isLoading) {
+    return <Spinner/>;
+  }
 
   return (
     <div className="player">
