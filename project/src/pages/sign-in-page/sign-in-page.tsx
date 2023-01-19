@@ -1,10 +1,11 @@
 import { ChangeEvent, FC, FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../common/enums';
+import { AppRoute, AuthorizationStatus } from '../../common/enums';
 import Logo from '../../components/logo/logo';
 import PageFooter from '../../components/page-footer/page-footer';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-reducer/user-selectors';
 import { AuthData } from '../../types/auth-data.type';
 
 const SignInPage: FC = () => {
@@ -12,6 +13,11 @@ const SignInPage: FC = () => {
   const [password, setPassword] = useState<string>('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    navigate(AppRoute.Main);
+  }
 
   const handleEmailChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);

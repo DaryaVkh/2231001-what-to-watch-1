@@ -3,11 +3,16 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
+import { AuthorizationStatus, NameSpace } from '../../common/enums';
 import SignInPage from './sign-in-page';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-const store = mockStore({});
+const store = mockStore({
+  [NameSpace.User]: {
+    authorizationStatus: AuthorizationStatus.NoAuth
+  }
+});
 
 describe('Page test: SignInPage', () => {
   it('Should render correctly', () => {
