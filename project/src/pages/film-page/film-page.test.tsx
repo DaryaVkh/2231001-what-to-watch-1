@@ -1,9 +1,10 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import { AuthorizationStatus, NameSpace } from '../../common/enums';
+import { AppRoute, AuthorizationStatus, NameSpace } from '../../common/enums';
 import { makeFakeFilm, makeFakeReview } from '../../utils/mocks';
 import FilmPage from './film-page';
 
@@ -34,7 +35,12 @@ describe('Page test: FilmPage', () => {
   it('Should render correctly', () => {
     render(
       <Provider store={store}>
-        <MemoryRouter>
+        <MemoryRouter initialEntries={[`/films/${fakeFilm.id}`]}>
+          <Routes>
+            <Route path={AppRoute.Film}>
+              <Route index element={<FilmPage/>}/>
+            </Route>
+          </Routes>
           <FilmPage/>
         </MemoryRouter>
       </Provider>
