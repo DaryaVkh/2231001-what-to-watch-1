@@ -36,7 +36,7 @@ const FilmPage: FC = () => {
     };
   }, [film, dispatch, filmId]);
 
-  if (!film) {
+  if (!film || film.id !== filmId) {
     return <Spinner />;
   }
 
